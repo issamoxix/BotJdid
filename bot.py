@@ -8,6 +8,8 @@ def run_discord_bot():
 
     intents = discord.Intents.default()
     intents.message_content = True
+    intents.voice_states = True
+
     client = discord.Client(intents=intents)
 
     @client.event

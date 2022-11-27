@@ -9,7 +9,7 @@ def run_discord_bot():
     intents = discord.Intents.default()
     intents.message_content = True
     intents.voice_states = True
-
+    intents.members = True
     client = discord.Client(intents=intents)
 
     @client.event
@@ -19,6 +19,12 @@ def run_discord_bot():
     @client.event
     async def on_message(message):
         await msg.msg_process(message, client)
+    
+    @client.event
+    async def on_member_join(member):
+        print(member.name , "dkhal l sever")
+    
+
     client.run(token=TOKEN)
 
     

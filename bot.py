@@ -1,6 +1,7 @@
 import discord
 from controllers import msg
 import utils.utils as utils
+from models.brain import Brain
 
 
 def run_discord_bot():
@@ -12,19 +13,19 @@ def run_discord_bot():
     intents.members = True
     client = discord.Client(intents=intents)
 
+    brain = Brain(client)
+
     @client.event
     async def on_ready():
+        brain.set_brain()
         print(f"{client.user} is running ! ")
 
     @client.event
     async def on_message(message):
-        await msg.msg_process(message, client)
-    
+        await msg.msg_process(message, client, brain)
+
     @client.event
     async def on_member_join(member):
-        print(member.name , "dkhal l sever")
-    
+        print(member.name, "dkhal l sever")
 
     client.run(token=TOKEN)
-
-    
